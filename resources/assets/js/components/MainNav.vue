@@ -5,8 +5,21 @@
         </div>
         <ul class="main-nav__list">
             <li class="main-nav__list-item">
-                <a href="#" class="main-nav__link">Articles</a>
+                <a @click.prevent="setMainNav('articles')" href="#" class="main-nav__link">Articles</a>
+            </li>
+            <li class="main-nav__list-item">
+                <a @click.prevent="setMainNav('other')" href="#" class="main-nav__link">Another Link</a>
             </li>
         </ul>
     </nav>
 </template>
+
+<script>
+    export default {
+        methods: {
+            setMainNav: function(navLink) {
+                this.$store.dispatch('setMainNav', navLink);
+            }
+        }
+    }
+</script>

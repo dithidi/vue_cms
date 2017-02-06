@@ -32,14 +32,13 @@
         color: $cms-color-white;
         display: block;
         padding: 10px;
-        text-decoration: none;
+        text-decoration: none !important;
         text-transform: uppercase;
         transition: 250ms;
 
         &:hover {
             background-color: lighten($cms-color-primary, 10);
             color: $cms-color-white;
-            text-decoration: none;
         }
     }
 }

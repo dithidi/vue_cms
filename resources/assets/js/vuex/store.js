@@ -7,11 +7,16 @@ Vue.use(Vuex);
 // then export the Vuex store for use by our components
 export default new Vuex.Store({
     state: {
+        mainNav: 'articles',
         articles: [],
         currentArticle: {}
     },
 
     mutations: {
+        SET_MAIN_NAV(state, navLink) {
+            state.mainNav = navLink;
+        },
+
         SET_ARTICLES(state, articles) {
             state.articles = articles;
         },
@@ -34,6 +39,10 @@ export default new Vuex.Store({
     },
 
     actions: {
+        setMainNav({commit}, navLink) {
+            commit('SET_MAIN_NAV', navLink);
+        },
+
         setArticles({ commit }, articles){
             commit('SET_ARTICLES', articles);
         },
@@ -48,6 +57,7 @@ export default new Vuex.Store({
     },
 
     getters: {
+        mainNav: state => state.mainNav,
         articles: state => state.articles,
         currentArticle: state => state.currentArticle
     }

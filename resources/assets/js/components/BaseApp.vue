@@ -1,7 +1,7 @@
 <template>
     <div class="admin">
         <main-nav></main-nav>
-        <article-admin></article-admin>
+        <article-admin v-if="navLink == 'articles'"></article-admin>
     </div>
 </template>
 
@@ -13,6 +13,12 @@
         components: {
             'main-nav': MainNav,
             'article-admin': Article
+        },
+
+        computed: {
+            navLink() {
+                return this.$store.getters.mainNav;
+            }
         }
     }
 </script>
