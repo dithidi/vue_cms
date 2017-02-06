@@ -1,5 +1,5 @@
 <template>
-    <div class="article-admin">
+    <div class="main-stage article-admin">
         <div v-for="article in articles" @click="setCurrentArticle(article)">{{article.title}}</div>
         <article-form v-if="showForm == true"></article-form>
     </div>
@@ -33,7 +33,7 @@
 
         methods: {
             fetchInitialData: function() {
-                if(articles.length) return;
+                if(this.articles.length) return;
 
                 this.$http.get('admin/articles').then((response) => {
                     this.$store.dispatch('setArticles', response.body);
