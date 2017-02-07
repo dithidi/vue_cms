@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="/css/app.css" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -60,8 +61,18 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 10px;
             }
+
+            .m-b-lg {
+                margin-bottom: 25px;
+            }
+
+            td {
+                text-align: left;
+            }
+
+            td:hover { cursor: pointer; }
         </style>
     </head>
     <body>
@@ -71,23 +82,34 @@
                     @if (Auth::check())
                         <a href="{{ url('/admin') }}">Admin</a>
                     @else
-                        <a href="{{ url('admin/login') }}">Login</a>
+                        <a href="{{ url('admin/login') }}">Admin Login</a>
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    VUECMS Example
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <h3 class="m-b-lg">Behold, the articles!</h3>
+                <table class="table table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-6">Title</th>
+                            <th class="col-xs-3">Published?</th>
+                            <th class="col-xs-3">Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($articles as $article)
+                            <tr>
+                                <td class="col-xs-6">{{$article->title}}</td>
+                                <td class="col-xs-3">{{$article->published ? 'Yes' : 'No'}}</td>
+                                <td class="col-xs-3">{{$article->created_at->format('F, d Y')}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
