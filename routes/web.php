@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
     Route::get('/articles', 'ArticleController@adminGetArticles');
     Route::get('/articles/{id}', 'ArticleController@adminGetArticle');
+    Route::post('/articles/{id}', 'ArticleController@adminUpdateArticle');
+    Route::post('/articles/', 'ArticleController@adminCreateArticle');
 });

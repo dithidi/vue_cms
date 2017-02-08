@@ -1,7 +1,39 @@
 <template>
     <div class="main-stage article-admin">
-        <div v-for="article in articles" @click="setCurrentArticle(article)">{{article.title}}</div>
-        <article-form v-if="showForm == true"></article-form>
+        <section v-if="showForm == false" class="article-admin__main-container">
+            <div class="article-admin__search-wrapper">
+                <form @submit.prevent="">
+                    <div class="form-group">
+                        <label for="articleTitle">Search for your article</label>
+                        <input v-model="searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                </form>
+                <a href="#" @click.prevent="showArticleCreate">Create an Article</a>
+            </div>
+            <table class="table table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Published</th>
+                        <th>Author</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="article in filterBy(articles, searchText)" @click="setCurrentArticle(article)">
+                        <td>{{article.title}}</td>
+                        <td>{{article.published ? 'Yes' : 'No'}}</td>
+                        <td>{{article.author}}</td>
+                        <td>{{article.created_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <a v-if="showForm == true" @click.prevent="showArticleList" href="#" class="article-admin__breadcrumb">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            Back to Articles
+        </a>
+        <article-form v-if="showForm == true" :formType=formType></article-form>
     </div>
 </template>
 
@@ -11,9 +43,9 @@
     export default {
         data() {
             return {
-                showList: true,
                 showForm: false,
-                formType: ''
+                formType: '',
+                searchText: ''
             }
         },
 
@@ -40,10 +72,21 @@
                 });
             },
 
+            showArticleCreate: function() {
+                this.$store.dispatch('setCurrentArticle', {});
+                this.formType = 'create';
+                this.showForm = true;
+            },
+
             setCurrentArticle: function(article) {
                 this.$store.dispatch('setCurrentArticle', article);
-                this.showForm = true;
                 this.formType = 'edit';
+                this.showForm = true;
+            },
+
+            showArticleList: function() {
+                this.showForm = false;
+                this.formType = '';
             }
         }
     }

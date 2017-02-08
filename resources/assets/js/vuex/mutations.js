@@ -11,10 +11,6 @@ module.exports = {
         state.articles.push(article);
     },
 
-    EDIT_ARTICLE(state, article) {
-        state.currentArticle = article;
-    },
-
     REMOVE_ARTICLE(state) {
         state.articles.$remove(state.currentArticle);
     },

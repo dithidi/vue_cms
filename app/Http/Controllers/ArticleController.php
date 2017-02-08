@@ -25,4 +25,30 @@ class ArticleController extends Controller
     public function adminGetArticle($id) {
         return Article::find($id);
     }
+
+    public function adminUpdateArticle($id, Request $request) {
+        $article = Article::find($id);
+
+        $article->title = $request->title;
+        $article->author = $request->author;
+        $article->body = $request->body;
+        $article->published = $request->published;
+
+        $article->save();
+
+        return $article;
+    }
+
+    public function adminCreateArticle(Request $request) {
+        $article = new Article;
+
+        $article->title = $request->title;
+        $article->author = $request->author;
+        $article->body = $request->body;
+        $article->published = $request->published;
+
+        $article->save();
+
+        return $article;
+    }
 }
