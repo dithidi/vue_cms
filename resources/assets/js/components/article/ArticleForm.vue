@@ -1,8 +1,9 @@
 <template>
     <div class="article-form">
-        <h1 class="article-form__title">
-            <span class="article-form__title-type" v-text="_formType"></span> Article
+        <h1 v-if="_formType == 'edit'" class="article-form__title">
+            Edit Article
         </h1>
+        <h1 v-else>Create Article</h1>
 
         <form class="article-form__form" @submit.prevent="_formType == 'edit' ? editArticle() : createArticle()">
             <div class="form-group">
